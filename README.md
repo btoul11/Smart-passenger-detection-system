@@ -27,9 +27,8 @@ The system continuously monitors the engine state (simulated in this prototype v
 | Piezo Buzzer | 1 | Audible alert |
 | Red LED | 1 | Visual alert indicator |
 | 250 kΩ Potentiometer | 1 | LCD contrast adjustment |
-| Force Sensor (FSR) | 1 | Seat pressure / occupancy sensing |
-| Resistor – 330 Ω | 1 | LED current-limiting |
-| Resistor – 1 kΩ | 1 | Sensor / signal circuit |
+| Seat Pressure Sensor (e.g. Chiffonade JY-102 type) | 1 | Multi-point resistive pressure pad designed for car seat/seatbelt sensing — placed under the seat cushion to detect passenger weight |
+| Resistor – 1 kΩ | 1 | Sensor signal circuit |
 | Resistor – 22 Ω | 1 | Buzzer circuit |
 
 **Software:** Arduino IDE, Arduino C/C++, `LiquidCrystal` library.
@@ -47,7 +46,7 @@ The design is intended to be **scalable**: future versions can support multiple 
 
 ## Mechanical / Operating Principle
 
-1. The FSR sensor is placed under the seat and continuously outputs an analog pressure reading to the Arduino.
+1. The seat pressure sensor pad — a multi-point resistive pressure sensor designed for car seat/seatbelt applications — is placed under the seat cushion and continuously outputs an analog pressure reading to the Arduino.
 2. While the engine state is ON, the system displays the normal operating status and does not raise alerts.
 3. When the engine state changes to OFF, the system enters **monitoring mode** and checks the seat sensor reading.
 4. The reading is compared against two calibrated threshold values to account for natural sensor fluctuation:
@@ -56,7 +55,7 @@ The design is intended to be **scalable**: future versions can support multiple 
 5. **If pressure stays above the threshold** (seat occupied) while the engine is OFF → the buzzer activates, the LED turns on, and the LCD displays `WARNING! Child in Bus`.
 6. **If pressure drops below the threshold** (seat empty) → the buzzer stops, the LED turns off, and the LCD returns to `Seat Empty`.
 
-This threshold-based calibration was required because the FSR's baseline analog reading did not stay perfectly at zero even with no weight applied, so upper/lower bounds were used to prevent false alerts.
+This threshold-based calibration was required because the sensor's baseline analog reading did not stay perfectly at zero even with no weight applied, so upper/lower bounds were used to prevent false alerts.
 
 ## Authors
 
