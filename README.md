@@ -24,7 +24,7 @@ The system continuously monitors the engine state (simulated in this prototype v
 | LCD 16×2 (parallel interface) | 1 | Displays system status and alert messages |
 | Breadboard | 1 | Circuit assembly |
 | Pushbutton | 1 | Simulates engine ON/OFF state |
-| Piezo Buzzer | 1 | Audible alert |
+| Buzzer | 1 | Audible alert |
 | Red LED | 1 | Visual alert indicator |
 | 250 kΩ Potentiometer | 1 | LCD contrast adjustment |
 | Seat Pressure Sensor (e.g. Chiffonade JY-102 type) | 1 | Multi-point resistive pressure pad designed for car seat/seatbelt sensing — placed under the seat cushion to detect passenger weight |
@@ -59,8 +59,8 @@ This threshold-based calibration was required because the sensor's baseline anal
 
 ## Authors
 
-- Albatul Abdullah Albogami — 44205933
-- Nouf Ibrahim AlDawsari — 44209442
+- Albatul Abdullah Albogami 
+- Nouf Ibrahim AlDawsari 
 
 **Supervised by:** Dr. Manahill Idriss Adrob Anja
 
