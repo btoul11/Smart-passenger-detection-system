@@ -1,4 +1,4 @@
-<img width="900" height="1600" alt="mybaby" src="https://github.com/user-attachments/assets/a88d049b-2b83-451e-9f01-daa4b7f33d9e" />
+<img width="1600" height="900" alt="mybaby" src="https://github.com/user-attachments/assets/6701f902-ead2-4abb-840e-09fc42a34116" />
 # Smart Passenger Detection System (SPDS)
 
 An Arduino-based embedded safety system that detects whether a passenger remains on a bus seat after the engine has been turned off, and triggers an immediate audio-visual alert.
