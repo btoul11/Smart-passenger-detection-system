@@ -1,46 +1,69 @@
-# Smart-passenger-detection-system
-Smart Passenger Detection System (SPDS) using Arduino and FSR sensors to ensure school bus safety.
-# Smart Passenger Detection System (SPDS) 🚌💡
+# Smart Passenger Detection System (SPDS)
 
-A smart embedded system designed to automatically detect remaining passengers or children on school bus seats after engine shutdown. The system uses non-invasive pressure sensors to provide immediate local audio-visual alerts, helping prevent accidental heatstroke incidents.
+An Arduino-based embedded safety system that detects whether a passenger remains on a bus seat after the engine has been turned off, and triggers an immediate audio-visual alert.
+
+## Overview
+
+SPDS is a low-cost, privacy-preserving prototype built to prevent children from being accidentally forgotten inside school buses. Instead of relying on cameras or manual inspection, the system uses a **Force Sensitive Resistor (FSR)** placed on the seat to detect occupancy, combined with an Arduino Uno controller, an LCD display, a buzzer, and an LED indicator to alert the driver.
+
+The system continuously monitors the engine state (simulated in this prototype via a push button) and the seat pressure reading. If the engine is switched OFF while the seat is still occupied, the system immediately raises a warning.
+
+## Project Purpose
+
+- Prevent incidents of children being left inside school buses after trips.
+- Provide a reliable technological safeguard that reduces dependence on manual, error-prone inspection by drivers.
+- Offer an alternative to camera-based detection systems, avoiding privacy concerns and high hardware cost.
+- Deliver a simple, low-cost, and scalable solution suitable for school and public transportation safety.
+- Support Saudi Vision 2030's goals for improving quality of life and traffic safety through practical technology.
+
+## System Configuration
+
+| Component | Quantity | Notes |
+|---|---|---|
+| Arduino Uno R3 | 1 | Main microcontroller / processing unit |
+| LCD 16×2 (parallel interface) | 1 | Displays system status and alert messages |
+| Breadboard | 1 | Circuit assembly |
+| Pushbutton | 1 | Simulates engine ON/OFF state |
+| Piezo Buzzer | 1 | Audible alert |
+| Red LED | 1 | Visual alert indicator |
+| 250 kΩ Potentiometer | 1 | LCD contrast adjustment |
+| Force Sensor (FSR) | 1 | Seat pressure / occupancy sensing |
+| Resistor – 330 Ω | 1 | LED current-limiting |
+| Resistor – 1 kΩ | 1 | Sensor / signal circuit |
+| Resistor – 22 Ω | 1 | Buzzer circuit |
+
+**Software:** Arduino IDE, Arduino C/C++, `LiquidCrystal` library.
+
+## Assembly Scope
+
+The current implementation is a **single-seat prototype** assembled on a breadboard for demonstration and testing purposes:
+
+- Only one FSR sensor is used to represent one bus seat.
+- The engine ON/OFF state is **simulated** with a push button rather than connected to a real vehicle ignition system.
+- Alerts (buzzer, LED, LCD) are **local only** — there is no wireless, mobile, or cloud connectivity in this version.
+- No camera or image-based sensing is used, by design, to preserve passenger privacy.
+
+The design is intended to be **scalable**: future versions can support multiple seats, integration with the vehicle's CAN Bus and OBD-II systems, and cloud connectivity via GPS/4G for remote monitoring and mobile notifications.
+
+## Mechanical / Operating Principle
+
+1. The FSR sensor is placed under the seat and continuously outputs an analog pressure reading to the Arduino.
+2. While the engine state is ON, the system displays the normal operating status and does not raise alerts.
+3. When the engine state changes to OFF, the system enters **monitoring mode** and checks the seat sensor reading.
+4. The reading is compared against two calibrated threshold values to account for natural sensor fluctuation:
+   - `thresholdHigh = 800`
+   - `thresholdLow = 500`
+5. **If pressure stays above the threshold** (seat occupied) while the engine is OFF → the buzzer activates, the LED turns on, and the LCD displays `WARNING! Child in Bus`.
+6. **If pressure drops below the threshold** (seat empty) → the buzzer stops, the LED turns off, and the LCD returns to `Seat Empty`.
+
+This threshold-based calibration was required because the FSR's baseline analog reading did not stay perfectly at zero even with no weight applied, so upper/lower bounds were used to prevent false alerts.
+
+## Authors
+
+- Albatul Abdullah Albogami — 44205933
+- Nouf Ibrahim AlDawsari — 44209442
+
+**Supervised by:** Dr. Manahill Idriss Adrob Anja
 
 ---
-
-## 📌 Project Overview
-Preventing child abandonment in school buses is a critical safety priority. SPDSautomates post-trip seat inspections, replacing manual checks with an accurate, privacy-preserving, and cost-effective hardware solution.
-
-Developed as a Graduation Capstone Project at **Taif University (2025-2026)**.
-
----
-
-## 🛠️ System Architecture & Logic
-* **Microcontroller:** Arduino Uno
-* **Sensors:** Force Sensitive Resistors (FSR) / Seat Pressure Sensors
-* **Outputs:** 16x2 LCD Display, Audio Buzzer, LED Safety Indicators
-* **Engine Control Simulation:** Ignition State Push-Button Switch
-
-### System Workflow:
-1. Upon turning off the bus engine, SPDS automatically transitions to active monitoring mode.
-2. The system scans seat pressure values based on pre-calibrated threshold ranges to prevent false alarms.
-3. If weight or pressure is detected, an immediate alarm sequence activates (LCD message, audible buzzer, and flashing LED).
-4. The system automatically resets once the seat is completely cleared.
-
----
-
-## 🚀 Future Development & Industrial Integration
-* **Automated Vehicle Integration:** Connecting directly via CAN Bus and OBD-II interfaces for automatic engine-state detection.
-* **IoT & Fleet Management:** Adding 4G and GPS modules to transmit instant alerts and locations to school administrators via mobile apps and SMS.
-* **External Alarm Triggering:** Wiring the system to activate the bus horn and hazard lights if internal warnings are not acknowledged.
-
----
-
-## 👥 Intellectual Property & Authors
-**Protected under Taif University Intellectual Property Rights and Regulations.**
-
-* **Authors & Engineers:** 
-  * Albatul Abdullah Albogami
-  * Nouf Ibrahim AlDawsari
-* **Project Supervisor:** Dr. Manahill Idriss Adrob Anja
-* **Institution:** Department of Computer Science, College of Computers and Information Technology, Taif University.
-
-*Copyright © 2025-2026 Albatul Albogami & Nouf AlDawsari. All Rights Reserved.*
+*Graduation project "Smart Passenger Detection System (SPDS)" — Department of Computer Science, College of Computers and Information Technology, Taif University, 2025–2026.*
